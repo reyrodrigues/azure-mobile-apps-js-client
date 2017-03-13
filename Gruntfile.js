@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 banner: '//! Copyright (c) Microsoft Corporation. All rights reserved. <%= pkg.name %> v<%= pkg.version %>\n',
-                mangle: true
+                mangle: false
             },
             web: {
                 src: 'sdk/src/generated/azure-mobile-apps-client.js',
