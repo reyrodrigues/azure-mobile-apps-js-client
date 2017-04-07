@@ -51,7 +51,7 @@
   "dependencies": {
     "azure-odata-sql": "^0.2.0",
     "azure-query-js": "^0.1.0",
-    "node-uuid": "^1.4.7",
+    "uuid": "^3.0.1",
     "verror": "^1.8.1"
   },
   "keywords": [
