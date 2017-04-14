@@ -42,7 +42,7 @@ Here are a few examples of how you can use the SDK.
 ```
 <html>
 <head>
-    <script src="https://zumo.blob.core.windows.net/sdk/azure-mobile-apps-client.2.0.0.js"></script>
+    <script src="https://zumo.blob.core.windows.net/sdk/azure-mobile-apps-client.2.0.1.js"></script>
     <script>
         // Create a reference to the Azure App Service
         var clientRef = new WindowsAzure.MobileServiceClient('https://YOUR-SITE-NAME.azurewebsites.net');
