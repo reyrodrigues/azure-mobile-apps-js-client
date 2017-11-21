@@ -449,7 +449,10 @@ function loginWithLoginControl(login, provider, useSingleSignOn, parameters, cal
         function (error, mobileServiceToken) {
             login._loginState = { inProcess: false, cancelCallback: null };
             onLoginComplete(error, mobileServiceToken, client, callback);
-        });
+        },
+        provider,
+        client.applicationUrl
+    );
 
     if (login._loginState.inProcess && platformResult && platformResult.cancelCallback) {
         login._loginState.cancelCallback = platformResult.cancelCallback;

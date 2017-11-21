@@ -19,7 +19,7 @@ exports.supportsCurrentRuntime = function () {
     return !!currentCordovaVersion() && !isRunUnderRippleEmulator();
 };
 
-exports.login = function (startUri, endUri, callback) {
+exports.login = function (startUri, endUri, callback, providerName, appUrl) {
     /// <summary>
     /// Displays the login UI and calls back on completion
     /// </summary>
@@ -34,8 +34,18 @@ exports.login = function (startUri, endUri, callback) {
                     ". Required: " + requiredCordovaVersion.major + "." + requiredCordovaVersion.minor;
         throw new Error(message);
     }
+
+    if (providerName === 'google') {
+        loginWithGoogle(appUrl, callback);
+    } else {
+        loginWithInAppBrowser(startUri, endUri, callback);
+    }
+};
+
+function loginWithInAppBrowser(startUri, endUri, callback) {
+
     if (!hasInAppBrowser) {
-        message = 'A required plugin: "org.apache.cordova.inappbrowser" was not detected.';
+        var message = 'A required plugin: "org.apache.cordova.inappbrowser" was not detected.';
         throw new Error(message);
     }
 
@@ -70,7 +80,20 @@ exports.login = function (startUri, endUri, callback) {
             }
         });
     }, 500);
-};
+}
+
+function loginWithGoogle(appUrl, callback) {
+
+    var successCallback = function (token) {
+        callback(null, token);
+    };
+
+    var errorCallback = function (errorResponse) {
+        callback(new Error(errorResponse), null);
+    };
+
+    cordova.exec(successCallback, errorCallback, "MobileServices", "loginWithGoogle", [appUrl])
+}
 
 function isRunUnderRippleEmulator () {
     // Returns true when application runs under Ripple emulator 
